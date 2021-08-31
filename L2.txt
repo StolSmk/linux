@@ -1,0 +1,146 @@
+    1  sudo bash autorun.sh
+    2  sudo apt update
+    3  sudo apt upgrade
+    4  sudo apt install ssh
+    5  ip a
+    6  sudo apt install perl gcc make
+    7  sudo reboot
+    8  ip a
+    9  pwd
+   10  whoami
+   11  sh
+   12  ls
+   13  ls ;
+   14  ls /
+   15  ls /home
+   16  ls -l
+   17  ls -l /
+   18  ls -l -a /
+   19  ls -l -a
+   20  ls -l -a /
+   21  ls ./
+   22  ls -l ./
+   23  ls -la ./
+   24  ls -la
+   25  ls -la .
+   26  ls -ls .
+   27  ls -la .
+   28  ls
+   29  ls .
+   30  ls ./
+   31  ls /
+   32  ls ..
+   33  ls ../
+   34  sudo apt install tree
+   35  tree --help
+   36  tree
+   37  history
+   38  man ls
+   39  type man
+   40  type ls
+   41  type cd
+   42  type ssh
+   43  type sudo
+   44  whereis cd
+   45  whereis sudo
+   46  mkdir L2
+   47  ls
+   48  cd L2
+   49  touch file
+   50  ls
+   51  file file
+   52  rm file
+   53  ls
+   54  vi vi_file
+   55  ls
+   56  clear
+   57  history
+   58  pwd
+   59  whoami
+   60  whoami --help
+   61  whoami --version
+   62  man whoami
+   63  cd /
+   64  pwd
+   65  cd .
+   66  cd
+   67  ls
+   68  cd L2
+   69  sh
+   70  ls
+   71  ls ..
+   72  ls -l
+   73  ls -l -a
+   74  ls -la
+   75  cd ~
+   76  ls -la
+   77  history
+   78  ls
+   79  type !
+   80  whereis !
+   81  whereis history
+   82  whereis sh
+   83  history
+   84  ls
+   85  cd L2
+   86  mkdir L2
+   87  ls
+   88  mkdir L2{1..99}
+   89  ls
+   90  rmdir L2
+   91  ls
+   92  touch L2
+   93  ls
+   94  touch L2{1..99}
+   95  ls
+   96  touch L3{1..99}
+   97  ls
+   98  file L2
+   99  stat L2
+  100  rm L2
+  101  ls
+  102  rm -r ./*
+  103  ls
+  104  touch L2{1..99}
+  105  ls
+  106  mkdir L2{1..99}
+  107  ls
+  108  mkdir L3{1..99}
+  109  ls
+  110  rm ./*
+  111  ls
+  112  touch L2
+  113  cp L2 L31
+  114  ls
+  115  cd L31
+  116  ls
+  117  cd ..
+  118  ls
+  119  cp -r L31 L310
+  120  cd L310
+  121  ls
+  122  touch L3
+  123  mv L3 L31
+  124  ls
+  125  touch L3
+  126  ls
+  127  mv L3 L3
+  128  mv L3 L2
+  129  ls
+  130  mv L2 L21
+  131  ls
+  132  cat L21
+  133  less L21
+  134  vi L21
+  135  cat L21
+  136  nano L21
+  137  cd ..
+  138  ls
+  139  ls L?2?
+  140  ls -la L?2?
+  141  ls -la *3
+  142  ls
+  143  rm ./L3?6
+  144  rm -r ./L3?6
+  145  ls
+  146  history
