@@ -1,0 +1,295 @@
+
+10 directories, 10 files
+geek@geek-VirtualBox:~/L3$ man chown
+geek@geek-VirtualBox:~/L3$ man chown
+geek@geek-VirtualBox:~/L3$ man chgrp
+geek@geek-VirtualBox:~/L3$ chown gb_L3_1:developers1 f31
+chown: changing ownership of 'f31': Operation not permitted
+geek@geek-VirtualBox:~/L3$ sudo chown gb_L3_1:developers1 f31
+geek@geek-VirtualBox:~/L3$ cat f31
+geek@geek-VirtualBox:~/L3$ cat f31
+geek@geek-VirtualBox:~/L3$ su gb_L3_1
+Password:
+gb_L3_1@geek-VirtualBox:/home/geek/L3$ ls
+d31  d310  d32  d33  d34  d35  d36  d37  d38  d39  f31  f310  f32  f33  f34  f35  f36  f37  f38  f39
+gb_L3_1@geek-VirtualBox:/home/geek/L3$ cat f31
+gb_L3_1@geek-VirtualBox:/home/geek/L3$ nano f31
+gb_L3_1@geek-VirtualBox:/home/geek/L3$ cat f31
+gb_L3_1
+gb_L3_1@geek-VirtualBox:/home/geek/L3$
+exit
+geek@geek-VirtualBox:~/L3$ cat f31
+gb_L3_1
+geek@geek-VirtualBox:~/L3$ nano f31
+geek@geek-VirtualBox:~/L3$ cat f31
+gb_L3_1
+geek@geek-VirtualBox:~/L3$ su gb_L3_2
+Password:
+bash: /home/geek/L3/.bashrc: Permission denied
+gb_L3_2@geek-VirtualBox:~$ ls
+d31  d310  d32  d33  d34  d35  d36  d37  d38  d39  f31  f310  f32  f33  f34  f35  f36  f37  f38  f39
+gb_L3_2@geek-VirtualBox:~$
+exit
+geek@geek-VirtualBox:~/L3$ su gb_L3_2
+Password:
+bash: /home/geek/L3/.bashrc: Permission denied
+gb_L3_2@geek-VirtualBox:~$ ls
+d31  d310  d32  d33  d34  d35  d36  d37  d38  d39  f31  f310  f32  f33  f34  f35  f36  f37  f38  f39
+gb_L3_2@geek-VirtualBox:~$ cat f31
+gb_L3_1
+gb_L3_2@geek-VirtualBox:~$ nano f31
+Unable to create directory /home/geek/L3/.local/share/nano/: Permission denied
+It is required for saving/loading search history or cursor positions.
+
+gb_L3_2@geek-VirtualBox:~$ cat f31
+gb_L3_1
+gb_L3_2
+gb_L3_2@geek-VirtualBox:~$
+exit
+geek@geek-VirtualBox:~/L3$ cat f31
+gb_L3_1
+gb_L3_2
+geek@geek-VirtualBox:~/L3$ su gb_L3_3
+Password:
+gb_L3_3@geek-VirtualBox:/home/geek/L3$ nano f31
+gb_L3_3@geek-VirtualBox:/home/geek/L3$ cat f31
+gb_L3_1
+gb_L3_2
+gb_L3_3@geek-VirtualBox:/home/geek/L3$
+exit
+geek@geek-VirtualBox:~/L3$ chgrp developers3 f32
+chgrp: changing group of 'f32': Operation not permitted
+geek@geek-VirtualBox:~/L3$ sudo chgrp developers3 f32
+geek@geek-VirtualBox:~/L3$ nano f32
+geek@geek-VirtualBox:~/L3$ cat f32
+lllll
+
+geek@geek-VirtualBox:~/L3$ su gb_L3_1
+Password:
+gb_L3_1@geek-VirtualBox:/home/geek/L3$ cat f32
+lllll
+
+gb_L3_1@geek-VirtualBox:/home/geek/L3$ nano f32
+gb_L3_1@geek-VirtualBox:/home/geek/L3$ cat f32
+lllll
+sdfsdf
+
+
+gb_L3_1@geek-VirtualBox:/home/geek/L3$
+exit
+geek@geek-VirtualBox:~/L3$ sudo -u gb_L3_1 nano f31
+geek@geek-VirtualBox:~/L3$ cat f31
+gb_L3_1
+gb_L3_2
+gb_L3_1 2
+geek@geek-VirtualBox:~/L3$ nano f31
+geek@geek-VirtualBox:~/L3$ touch task_L3
+geek@geek-VirtualBox:~/L3$ nano task_L3
+geek@geek-VirtualBox:~/L3$ nano task_L3
+
+
+Use "fg" to return to nano.
+
+[1]+  Stopped                 nano task_L3
+geek@geek-VirtualBox:~/L3$ fg %1
+nano task_L3
+
+
+Use "fg" to return to nano.
+
+[1]+  Stopped                 nano task_L3
+geek@geek-VirtualBox:~/L3$ sudo useradd -s /bin/bash -d /home/taskUser -m taskUser
+geek@geek-VirtualBox:~/L3$ sudo passwd taskUser
+New password:
+Retype new password:
+Sorry, passwords do not match.
+passwd: Authentication token manipulation error
+passwd: password unchanged
+geek@geek-VirtualBox:~/L3$ sudo passwd taskUser
+New password:
+Retype new password:
+Sorry, passwords do not match.
+passwd: Authentication token manipulation error
+passwd: password unchanged
+geek@geek-VirtualBox:~/L3$ sudo passwd taskUser
+New password:
+Retype new password:
+passwd: password updated successfully
+geek@geek-VirtualBox:~/L3$ su taskUser
+Password:
+taskUser@geek-VirtualBox:/home/geek/L3$
+exit
+geek@geek-VirtualBox:~/L3$ deluser taskUser
+/usr/sbin/deluser: Only root may remove a user or group from the system.
+geek@geek-VirtualBox:~/L3$ sudo deluser taskUser
+Removing user `taskUser' ...
+Warning: group `taskUser' has no more members.
+Done.
+geek@geek-VirtualBox:~/L3$ ls
+d31  d310  d32  d33  d34  d35  d36  d37  d38  d39  f31  f310  f32  f33  f34  f35  f36  f37  f38  f39  task_L3
+geek@geek-VirtualBox:~/L3$ mkdir taskUser
+geek@geek-VirtualBox:~/L3$ ls
+d31  d310  d32  d33  d34  d35  d36  d37  d38  d39  f31  f310  f32  f33  f34  f35  f36  f37  f38  f39  task_L3  taskUser
+geek@geek-VirtualBox:~/L3$ sudo nano /etc/passwd
+
+
+Use "fg" to return to nano.
+
+[2]+  Stopped                 sudo nano /etc/passwd
+geek@geek-VirtualBox:~/L3$ cd taskUser/
+geek@geek-VirtualBox:~/L3/taskUser$ pwd
+/home/geek/L3/taskUser
+geek@geek-VirtualBox:~/L3/taskUser$ fg %2
+sudo nano /etc/passwd   (wd: ~/L3)
+
+
+Use "fg" to return to nano.
+
+[2]+  Stopped                 sudo nano /etc/passwd  (wd: ~/L3)
+(wd now: ~/L3/taskUser)
+geek@geek-VirtualBox:~/L3/taskUser$ fg %2
+sudo nano /etc/passwd   (wd: ~/L3)
+geek@geek-VirtualBox:~/L3/taskUser$ sudo nano /etc/group
+geek@geek-VirtualBox:~/L3/taskUser$ sudo passwd taskUser
+New password:
+Retype new password:
+passwd: password updated successfully
+geek@geek-VirtualBox:~/L3/taskUser$ sudo addgroup dev4
+Adding group `dev4' (GID 1007) ...
+Done.
+geek@geek-VirtualBox:~/L3/taskUser$ sudo nano /etc/group
+geek@geek-VirtualBox:~/L3/taskUser$ sudo usermod -g dev4 taskUser
+geek@geek-VirtualBox:~/L3/taskUser$ sudo nano /etc/group
+geek@geek-VirtualBox:~/L3/taskUser$
+logout
+There are stopped jobs.
+geek@geek-VirtualBox:~/L3/taskUser$ sudo taskUser
+sudo: taskUser: command not found
+geek@geek-VirtualBox:~/L3/taskUser$ su taskUser
+Password:
+bash: /home/geek/L3/taskUser/.bashrc: Permission denied
+taskUser@geek-VirtualBox:~$ nano /etc/group
+Unable to create directory /home/geek/L3/taskUser/.local/share/nano/: Permission denied
+It is required for saving/loading search history or cursor positions.
+
+taskUser@geek-VirtualBox:~$
+exit
+geek@geek-VirtualBox:~/L3/taskUser$ su taskUser
+Password:
+bash: /home/geek/L3/taskUser/.bashrc: Permission denied
+taskUser@geek-VirtualBox:~$ cd ~
+bash: cd: /home/geek/L3/taskUser: Permission denied
+taskUser@geek-VirtualBox:~$ pwd
+/home/geek/L3/taskUser
+taskUser@geek-VirtualBox:~$ cd /
+taskUser@geek-VirtualBox:/$ pwd
+/
+taskUser@geek-VirtualBox:/$ cd ~
+bash: cd: /home/geek/L3/taskUser: Permission denied
+taskUser@geek-VirtualBox:/$ pwd
+/
+taskUser@geek-VirtualBox:/$
+exit
+geek@geek-VirtualBox:~/L3/taskUser$ sudo nano /etc/group
+geek@geek-VirtualBox:~/L3/taskUser$ su taskUser
+Password:
+bash: /home/geek/L3/taskUser/.bashrc: Permission denied
+taskUser@geek-VirtualBox:~$
+exit
+geek@geek-VirtualBox:~/L3/taskUser$ sudo usermod -g dev4 gb_L3_1
+geek@geek-VirtualBox:~/L3/taskUser$ sudo nano /etc/group
+geek@geek-VirtualBox:~/L3/taskUser$ sudo usermod -g dev4 gb_L3_1
+usermod: no changes
+geek@geek-VirtualBox:~/L3/taskUser$ sudo nano /etc/group
+geek@geek-VirtualBox:~/L3/taskUser$ usermod -g dev4 gb_L3_1
+usermod: no changes
+geek@geek-VirtualBox:~/L3/taskUser$ usermod -aG dev4 gb_L3_
+gb_L3_1  gb_L3_2  gb_L3_3
+geek@geek-VirtualBox:~/L3/taskUser$ usermod -aG dev4 gb_L3_1
+usermod: Permission denied.
+usermod: cannot lock /etc/passwd; try again later.
+geek@geek-VirtualBox:~/L3/taskUser$ sudo usermod -aG dev4 gb_L3_1
+geek@geek-VirtualBox:~/L3/taskUser$ sudo nano /etc/group
+geek@geek-VirtualBox:~/L3/taskUser$ sudo usermod -aG dev5 taskUser
+geek@geek-VirtualBox:~/L3/taskUser$ sudo nano /etc/group
+geek@geek-VirtualBox:~/L3/taskUser$ sudo nano /etc/group
+geek@geek-VirtualBox:~/L3/taskUser$ adduser tadkSuperUser
+adduser: Only root may add a user or group to the system.
+geek@geek-VirtualBox:~/L3/taskUser$ sudo adduser tadkSuperUser
+adduser: Please enter a username matching the regular expression configured
+via the NAME_REGEX[_SYSTEM] configuration variable.  Use the `--force-badname'
+option to relax this check or reconfigure NAME_REGEX.
+geek@geek-VirtualBox:~/L3/taskUser$ sudo adduser tasksuperuser
+Adding user `tasksuperuser' ...
+Adding new group `tasksuperuser' (1009) ...
+Adding new user `tasksuperuser' (1005) with group `tasksuperuser' ...
+Creating home directory `/home/tasksuperuser' ...
+Copying files from `/etc/skel' ...
+New password:
+Retype new password:
+passwd: password updated successfully
+Changing the user information for tasksuperuser
+Enter the new value, or press ENTER for the default
+        Full Name []: Task Super User
+        Room Number []: 1
+        Work Phone []: 2
+        Home Phone []: 3
+        Other []: Other Info
+Is the information correct? [Y/n] y
+geek@geek-VirtualBox:~/L3/taskUser$ usermod -aG sudo tasksuperuser
+usermod: Permission denied.
+usermod: cannot lock /etc/passwd; try again later.
+geek@geek-VirtualBox:~/L3/taskUser$ sudo usermod -aG sudo tasksuperuser
+geek@geek-VirtualBox:~/L3/taskUser$ sudo nano /etc/g
+gai.conf            gimp/               gnome-system-tools/ group-              gshadow-            gtk-3.0/
+gdb/                glvnd/              groff/              grub.d/             gss/                guest-session/
+ghostscript/        gnome/              group               gshadow             gtk-2.0/
+geek@geek-VirtualBox:~/L3/taskUser$ sudo nano /etc/gro
+groff/  group   group-
+geek@geek-VirtualBox:~/L3/taskUser$ sudo nano /etc/group
+geek@geek-VirtualBox:~/L3/taskUser$ sudo nano /etc/sudoers
+
+
+Use "fg" to return to nano.
+
+[2]+  Stopped                 sudo nano /etc/sudoers
+geek@geek-VirtualBox:~/L3/taskUser$ fg %2
+sudo nano /etc/sudoers
+geek@geek-VirtualBox:~/L3/taskUser$ su tasksuperuser
+Password:
+To run a command as administrator (user "root"), use "sudo <command>".
+See "man sudo_root" for details.
+
+tasksuperuser@geek-VirtualBox:/home/geek/L3/taskUser$ sudo apt install htop
+[sudo] password for tasksuperuser:
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+htop is already the newest version (3.0.5-6).
+The following package was automatically installed and is no longer required:
+  libllvm11
+Use 'sudo apt autoremove' to remove it.
+0 upgraded, 0 newly installed, 0 to remove and 15 not upgraded.
+tasksuperuser@geek-VirtualBox:/home/geek/L3/taskUser$ cd ~
+tasksuperuser@geek-VirtualBox:~$ pwd
+/home/tasksuperuser
+tasksuperuser@geek-VirtualBox:~$ sudo nano /etc/sudoers
+tasksuperuser@geek-VirtualBox:~$ sudo apt install htop
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+htop is already the newest version (3.0.5-6).
+The following package was automatically installed and is no longer required:
+  libllvm11
+Use 'sudo apt autoremove' to remove it.
+0 upgraded, 0 newly installed, 0 to remove and 15 not upgraded.
+tasksuperuser@geek-VirtualBox:~$ sudo apt install htop
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+htop is already the newest version (3.0.5-6).
+The following package was automatically installed and is no longer required:
+  libllvm11
+Use 'sudo apt autoremove' to remove it.
+0 upgraded, 0 newly installed, 0 to remove and 15 not upgraded.
+tasksuperuser@geek-VirtualBox:~$
