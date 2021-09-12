@@ -1,0 +1,59 @@
+1.	Потоки ввода/вывода. Создать файл, используя команду echo. Используя команду cat, прочитать содержимое каталога etc, ошибки перенаправить в отдельный файл.
+
+geek@geek-VirtualBox:~/L4$ echo 'echo text' > echo_file
+geek@geek-VirtualBox:~/L4$ ls
+echo_file
+geek@geek-VirtualBox:~/L4$ cat echo_file
+echo text
+geek@geek-VirtualBox:~/L4$ cat /etc/* > etc_files_content 2> etc_files_content_read_errors
+
+2.	Конвейер (pipeline). Использовать команду cut на вывод длинного списка каталога, чтобы отобразить только права доступа к файлам. Затем отправить в конвейере этот вывод на sort и uniq, чтобы отфильтровать все повторяющиеся строки.
+
+geek@geek-VirtualBox:~/L4$ ls -la / | grep -E -o '([a-z]|-){10}' | cat | sort | uniq > sorted_uniq_folder_rights
+
+3.	Управление процессами. Изменить конфигурационный файл службы SSH: /etc/ssh/sshd_config, отключив аутентификацию по паролю PasswordAuthentication no. Выполните рестарт службы systemctl restart sshd (service sshd restart), верните аутентификацию по паролю, выполните reload службы systemctl reload sshd (service sshd reload). В чём различие между действиями restart и reload? 
+
+geek@geek-VirtualBox:~/L4$ sudo nano /etc/ssh/sshd_config
+[sudo] password for geek:
+geek@geek-VirtualBox:~/L4$ systemctl restart sshd
+==== AUTHENTICATING FOR org.freedesktop.systemd1.manage-units ===
+Authentication is required to restart 'ssh.service'.
+Multiple identities can be used for authentication:
+ 1.  geek,,, (geek)
+ 2.  Task Super User,1,2,3,Other Info (tasksuperuser)
+Choose identity to authenticate as (1-2): 1
+Password:
+==== AUTHENTICATION COMPLETE ===
+geek@geek-VirtualBox:~/L4$ sudo nano /etc/ssh/sshd_config
+geek@geek-VirtualBox:~/L4$ systemctl reload sshd
+==== AUTHENTICATING FOR org.freedesktop.systemd1.manage-units ===
+Authentication is required to reload 'ssh.service'.
+Multiple identities can be used for authentication:
+ 1.  geek,,, (geek)
+ 2.  Task Super User,1,2,3,Other Info (tasksuperuser)
+Choose identity to authenticate as (1-2): 1
+Password:
+==== AUTHENTICATION COMPLETE ===
+geek@geek-VirtualBox:~/L4$
+
+4.	Сигналы процессам. Запустите mc. Используя ps, найдите PID процесса, завершите процесс, передав ему сигнал 9.
+
+geek@geek-VirtualBox:~/L4$ mc
+
+[1]+  Stopped                 mc
+geek@geek-VirtualBox:~/L4$ ps
+    PID TTY          TIME CMD
+  12059 pts/1    00:00:00 bash
+  13241 pts/1    00:00:00 mc
+  13250 pts/1    00:00:00 ps
+geek@geek-VirtualBox:~/L4$ sudo kill -9 `ps | grep -E '(.*mc)' | grep -Eo '[0-9]{5}'`
+[1]+  Killed                  mc
+geek@geek-VirtualBox:~/L4$ ps
+    PID TTY          TIME CMD
+  12059 pts/1    00:00:00 bash
+  13258 pts/1    00:00:00 ps
+geek@geek-VirtualBox:~/L4$
+
+
+
+
