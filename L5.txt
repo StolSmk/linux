@@ -1,0 +1,162 @@
+1.	Создать файл file1 и наполнить его произвольным содержимым. Скопировать его в file2. Создать символическую ссылку file3 на file1. Создать жёсткую ссылку file4 на file1. Посмотреть, какие inode у файлов. Удалить file1. Что стало с остальными созданными файлами? Попробовать вывести их на экран.
+
+geek@geek-VirtualBox:~$ mkdir L5
+geek@geek-VirtualBox:~$ cd L5
+geek@geek-VirtualBox:~/L5$ touch file1
+geek@geek-VirtualBox:~/L5$ echo 'some text' > file1
+geek@geek-VirtualBox:~/L5$ cp file1 file2
+geek@geek-VirtualBox:~/L5$ ln -s file1 file3
+geek@geek-VirtualBox:~/L5$ ln file1 file4
+geek@geek-VirtualBox:~/L5$ stat file1
+  File: file1
+  Size: 10              Blocks: 8          IO Block: 4096   regular file
+Device: 803h/2051d      Inode: 806350      Links: 2
+Access: (0664/-rw-rw-r--)  Uid: ( 1000/    geek)   Gid: ( 1000/    geek)
+Access: 2021-09-16 20:55:09.415242305 +0300
+Modify: 2021-09-16 20:52:11.118131350 +0300
+Change: 2021-09-16 20:58:43.313650278 +0300
+ Birth: 2021-09-16 20:47:17.507387900 +0300
+geek@geek-VirtualBox:~/L5$ stat file3
+  File: file3 -> file1
+  Size: 5               Blocks: 0          IO Block: 4096   symbolic link
+Device: 803h/2051d      Inode: 806393      Links: 1
+Access: (0777/lrwxrwxrwx)  Uid: ( 1000/    geek)   Gid: ( 1000/    geek)
+Access: 2021-09-16 20:57:28.304657690 +0300
+Modify: 2021-09-16 20:57:22.249631464 +0300
+Change: 2021-09-16 20:57:22.249631464 +0300
+ Birth: 2021-09-16 20:57:22.249631464 +0300
+geek@geek-VirtualBox:~/L5$ stat file4
+  File: file4
+  Size: 10              Blocks: 8          IO Block: 4096   regular file
+Device: 803h/2051d      Inode: 806350      Links: 2
+Access: (0664/-rw-rw-r--)  Uid: ( 1000/    geek)   Gid: ( 1000/    geek)
+Access: 2021-09-16 20:55:09.415242305 +0300
+Modify: 2021-09-16 20:52:11.118131350 +0300
+Change: 2021-09-16 20:58:43.313650278 +0300
+ Birth: 2021-09-16 20:47:17.507387900 +0300
+geek@geek-VirtualBox:~/L5$ rm file1
+geek@geek-VirtualBox:~/L5$ cat file3
+cat: file3: No such file or directory
+geek@geek-VirtualBox:~/L5$ cat file4
+some text
+
+2.	Дать созданным файлам другие, произвольные имена. Создать новую символическую ссылку. Переместить ссылки в другую директорию.
+
+geek@geek-VirtualBox:~/L5$ mv file2 file2_new
+geek@geek-VirtualBox:~/L5$ mv file4 file4_new
+geek@geek-VirtualBox:~/L5$ ln -s file2_new link_file2_new
+geek@geek-VirtualBox:~/L5$ mkdir other_dir
+geek@geek-VirtualBox:~/L5$ mv link_file2_new other_dir
+geek@geek-VirtualBox:~/L5$ cd other_dir/
+geek@geek-VirtualBox:~/L5/other_dir$ cat link_file2_new
+cat: link_file2_new: No such file or directory
+
+3.	Создать два произвольных файла. Первому присвоить права на чтение и запись для владельца и группы, только на чтение — для всех. Второму присвоить права на чтение и запись только для владельца. Сделать это в численном и символьном виде.
+
+geek@geek-VirtualBox:~/L5$ mkdir task3
+geek@geek-VirtualBox:~/L5$ cd task3/
+geek@geek-VirtualBox:~/L5/task3$ touch file{1,2}
+geek@geek-VirtualBox:~/L5/task3$ chmod ug+rw file1
+geek@geek-VirtualBox:~/L5/task3$ chmod o=r file1
+geek@geek-VirtualBox:~/L5/task3$ chmod u=rw file1
+geek@geek-VirtualBox:~/L5/task3$ chmod go=- file2
+geek@geek-VirtualBox:~/L5/task3$ chmod a=- file1
+geek@geek-VirtualBox:~/L5/task3$ chmod a=- file2
+geek@geek-VirtualBox:~/L5/task3$ chmod 664 file1
+geek@geek-VirtualBox:~/L5/task3$ chmod 600 file2
+
+4.	* Создать группу developer и нескольких пользователей, входящих в неё. Создать директорию для совместной работы. Сделать так, чтобы созданные одними пользователями файлы могли изменять другие пользователи этой группы.
+
+Создал двух пользователей.
+Поместил их в одну группу.
+Создал в домашнем каталоге пользователя1 папку.
+Присвоил папке разрешение для группы rwx.
+Затем присвоил папке разрешение для группы s.
+Однако когда создаю новые файлы в папке они все по умолчанию -rw-r--r--, т.е. другой пользователь из группы может их только читать! Но не изменять! Чего я делаю не так?
+
+5.	* Создать в директории для совместной работы поддиректорию для обмена файлами, но чтобы удалять файлы могли только их создатели.
+
+geek@geek-VirtualBox:/home$ cd dev
+geek@geek-VirtualBox:/home/dev$ ls
+f1
+geek@geek-VirtualBox:/home/dev$ su developer_1
+Password:
+developer_1@geek-VirtualBox:/home/dev$ ls
+f1
+developer_1@geek-VirtualBox:/home/dev$ ls -l
+total 4
+-rw-r--r-- 1 developer_1 developers 3 сен 16 23:58 f1
+developer_1@geek-VirtualBox:/home/dev$ mkdir exch
+developer_1@geek-VirtualBox:/home/dev$ ls
+exch  f1
+developer_1@geek-VirtualBox:/home/dev$ ls -l
+total 8
+drwxr-xr-x 2 developer_1 developers 4096 сен 17 00:11 exch
+-rw-r--r-- 1 developer_1 developers    3 сен 16 23:58 f1
+developer_1@geek-VirtualBox:/home/dev$ chmod 1770 exch
+developer_1@geek-VirtualBox:/home/dev$ ls -l
+total 8
+drwxrwx--T 2 developer_1 developers 4096 сен 17 00:11 exch
+-rw-r--r-- 1 developer_1 developers    3 сен 16 23:58 f1
+developer_1@geek-VirtualBox:/home/dev$ cd exch
+developer_1@geek-VirtualBox:/home/dev/exch$ touch f1
+developer_1@geek-VirtualBox:/home/dev/exch$ ls
+f1
+developer_1@geek-VirtualBox:/home/dev/exch$ ls -l
+total 0
+-rw-r--r-- 1 developer_1 developers 0 сен 17 00:13 f1
+developer_1@geek-VirtualBox:/home/dev/exch$ su developer_2
+Password:
+developer_2@geek-VirtualBox:/home/dev/exch$ ls -l
+total 0
+-rw-r--r-- 1 developer_1 developers 0 сен 17 00:13 f1
+developer_2@geek-VirtualBox:/home/dev/exch$ touch f2
+developer_2@geek-VirtualBox:/home/dev/exch$ ls -l
+total 0
+-rw-r--r-- 1 developer_1 developers 0 сен 17 00:13 f1
+-rw-r--r-- 1 developer_2 developers 0 сен 17 00:13 f2
+developer_2@geek-VirtualBox:/home/dev/exch$ rm f1
+rm: remove write-protected regular empty file 'f1'? y
+rm: cannot remove 'f1': Operation not permitted
+developer_2@geek-VirtualBox:/home/dev/exch$ ls
+f1  f2
+developer_2@geek-VirtualBox:/home/dev/exch$ rm f2
+developer_2@geek-VirtualBox:/home/dev/exch$ ls
+f1
+developer_2@geek-VirtualBox:/home/dev/exch$ su geek
+Password:
+geek@geek-VirtualBox:/home/dev/exch$ ls
+ls: cannot open directory '.': Permission denied
+geek@geek-VirtualBox:/home/dev/exch$
+
+6.	* Создать директорию, в которой есть несколько файлов. Сделать так, чтобы открыть файлы можно было, только зная имя файла, а через ls список файлов посмотреть было нельзя.
+
+developer_1@geek-VirtualBox:/home/dev$ mkdir dir
+developer_1@geek-VirtualBox:/home/dev$ ls
+dir  exch  f1
+developer_1@geek-VirtualBox:/home/dev$ ls -l
+total 12
+drwxr-xr-x 2 developer_1 developers 4096 сен 17 00:15 dir
+drwxrwx--T 2 developer_1 developers 4096 сен 17 00:14 exch
+-rw-r--r-- 1 developer_1 developers    3 сен 16 23:58 f1
+developer_1@geek-VirtualBox:/home/dev$ cd dir
+developer_1@geek-VirtualBox:/home/dev/dir$ touch f{1..5}
+developer_1@geek-VirtualBox:/home/dev/dir$ ls
+f1  f2  f3  f4  f5
+developer_1@geek-VirtualBox:/home/dev/dir$ cd ..
+developer_1@geek-VirtualBox:/home/dev$ chmod 440 dir
+developer_1@geek-VirtualBox:/home/dev$ ls -l
+total 12
+dr--r----- 2 developer_1 developers 4096 сен 17 00:17 dir
+drwxrwx--T 2 developer_1 developers 4096 сен 17 00:14 exch
+-rw-r--r-- 1 developer_1 developers    3 сен 16 23:58 f1
+developer_1@geek-VirtualBox:/home/dev$ cd dir
+bash: cd: dir: Permission denied
+developer_1@geek-VirtualBox:/home/dev$ cat dir/f1
+cat: dir/f1: Permission denied
+developer_1@geek-VirtualBox:/home/dev$ chmod 110 dir
+developer_1@geek-VirtualBox:/home/dev$ cd dir
+developer_1@geek-VirtualBox:/home/dev/dir$ ls
+ls: cannot open directory '.': Permission denied
+developer_1@geek-VirtualBox:/home/dev/dir$ cat f1
+developer_1@geek-VirtualBox:/home/dev/dir$
