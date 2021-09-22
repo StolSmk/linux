@@ -1,0 +1,108 @@
+1.	Написать скрипт, который удаляет из текстового файла пустые строки и заменяет маленькие символы на большие. Воспользуйтесь tr или SED.
+
+geek@geek-VirtualBox:~/L6$ touch file
+geek@geek-VirtualBox:~/L6$ nano file
+geek@geek-VirtualBox:~/L6$ cat file
+asdfl;fkjfa;dfskj;
+
+
+sdfadff
+
+
+sdfadfsdf
+v
+vd
+
+dsd
+
+
+sdfsasdfqweffsd
+geek@geek-VirtualBox:~/L6$ cat file | tr -s '\n' | tr [:lower:] [:upper:] > file1
+geek@geek-VirtualBox:~/L6$ cat file1
+ASDFL;FKJFA;DFSKJ;
+SDFADFF
+SDFADFSDF
+V
+VD
+DSD
+SDFSASDFQWEFFSD
+
+geek@geek-VirtualBox:~/L6$ cat file | sed '/^$/d' | sed 's/\s{2,}/\n/g' > file1
+geek@geek-VirtualBox:~/L6$ cat file1
+ASDFL;FKJFA;DFSKJ;
+SDFADFF
+SDFADFSDF
+V
+VD
+DSD
+SDFSASDFQWEFFSD
+
+2.	Создать однострочный скрипт, который создаст директории для нескольких годов (2010–2017), в них — поддиректории для месяцев (от 01 до 12), и в каждый из них запишет несколько файлов с произвольными записями. Например, 001.txt, содержащий текст «Файл 001», 002.txt с текстом «Файл 002» и т. д.
+
+geek@geek-VirtualBox:~/L6$ for y in 20{17..21}; do for m in {1..12}; do for f in {1..5}; do mkdir -p $y/$m; echo file_$f.txt > $y/$m/$f.txt; done; done; done
+...
+    ├── 7
+    │   ├── 1.txt
+    │   ├── 2.txt
+    │   ├── 3.txt
+    │   ├── 4.txt
+    │   └── 5.txt
+    ├── 8
+    │   ├── 1.txt
+    │   ├── 2.txt
+    │   ├── 3.txt
+    │   ├── 4.txt
+    │   └── 5.txt
+    └── 9
+        ├── 1.txt
+        ├── 2.txt
+        ├── 3.txt
+        ├── 4.txt
+        └── 5.txt
+
+65 directories, 300 files
+
+
+3.	Использовать команду AWK на вывод длинного списка каталога, чтобы отобразить только права доступа к файлам. Затем отправить в конвейере этот вывод на sort и uniq, чтобы отфильтровать все повторяющиеся строки.
+
+geek@geek-VirtualBox:/$ ls -l | awk '{print $1}' | grep -v total | sort | uniq
+drwx------
+drwxrwxrwt
+drwxrwxr-x
+drwxr-xr-x
+dr-xr-xr-x
+lrwxrwxrwx
+-rw-------
+
+4.	Используя grep, проанализировать файл /var/log/syslog, отобрав события на своё усмотрение.
+
+geek@geek-VirtualBox:/$ cat /var/log/syslog | grep manager:
+Sep 21 22:35:28 geek-VirtualBox NetworkManager[477]: <info>  [1632252928.2580] manager: kernel firmware directory '/lib/firmware' changed
+Sep 22 22:19:21 geek-VirtualBox NetworkManager[474]: <info>  [1632338361.2787] bus-manager: acquired D-Bus service "org.freedesktop.NetworkManager"
+Sep 22 22:19:23 geek-VirtualBox NetworkManager[474]: <info>  [1632338363.2450] manager: rfkill: Wi-Fi enabled by radio killswitch; enabled by state file
+Sep 22 22:19:23 geek-VirtualBox NetworkManager[474]: <info>  [1632338363.2452] manager: rfkill: WWAN enabled by radio killswitch; enabled by state file
+Sep 22 22:19:23 geek-VirtualBox NetworkManager[474]: <info>  [1632338363.2453] manager: Networking is enabled by state file
+Sep 22 22:19:23 geek-VirtualBox NetworkManager[474]: <info>  [1632338363.3170] manager: (lo): new Generic device (/org/freedesktop/NetworkManager/Devices/1)
+Sep 22 22:19:23 geek-VirtualBox NetworkManager[474]: <info>  [1632338363.3260] manager: (enp0s3): new Ethernet device (/org/freedesktop/NetworkManager/Devices/2)
+Sep 22 22:19:23 geek-VirtualBox NetworkManager[474]: <info>  [1632338363.6606] manager: (enp0s8): new Ethernet device (/org/freedesktop/NetworkManager/Devices/3)
+Sep 22 22:19:23 geek-VirtualBox NetworkManager[474]: <info>  [1632338363.7491] modem-manager: ModemManager available
+Sep 22 22:19:23 geek-VirtualBox NetworkManager[474]: <info>  [1632338363.7504] manager: NetworkManager state is now CONNECTING
+Sep 22 22:19:23 geek-VirtualBox NetworkManager[474]: <info>  [1632338363.8774] manager: NetworkManager state is now CONNECTED_GLOBAL
+Sep 22 22:19:23 geek-VirtualBox NetworkManager[474]: <info>  [1632338363.9510] manager: startup complete
+
+5.	Создать разовое задание на перезагрузку операционной системы, используя at.
+
+root@geek-VirtualBox:/home/geek/L6# ls
+2017  2018  2019  2020  2021  script
+root@geek-VirtualBox:/home/geek/L6# at -f script now +1 minute
+warning: commands will be executed using /bin/sh
+job 5 at Thu Sep 23 00:08:00 2021
+root@geek-VirtualBox:/home/geek/L6# Connection to 192.168.0.103 closed by remote host.
+Connection to 192.168.0.103 closed.
+
+6.	Написать скрипт, делающий архивную копию каталога etc, и прописать задание в crontab.
+
+geek@geek-VirtualBox:~/L6$ crontab -e
+* * 1 * * geek tar -cvf ~/L6/tar_etc_`date +%F` /etc
+
+
