@@ -1,0 +1,16 @@
+root@geek-VirtualBox:/etc/apache2/sites-available# curl localhost:80 | grep 808
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+1         PORT: 8081
+00 10900  100 10900    0     0  2128k      0 --:--:-- --:--:-- --:--:-- 2128k
+root@geek-VirtualBox:/etc/apache2/sites-available# curl localhost:80 | grep 808
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100 10901  100 10901    0     0  10.3M      0 --:--          PORT: 8082
+:-- --:--:-- --:--:-- 10.3M
+root@geek-VirtualBox:/etc/apache2/sites-available# curl localhost:80 | grep 808
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+1          PORT: 8083
+00 10901  100 10901    0     0  2129k      0 --:--:-- --:--:-- --:--:-- 2129k
+root@geek-VirtualBox:/etc/apache2/sites-available#
